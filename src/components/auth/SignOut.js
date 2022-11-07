@@ -5,9 +5,30 @@ import {Button, ButtonGroup} from 'react-bootstrap'
 import { signOut } from '../../api/auth'
 import messages from '../shared/AutoDismissAlert/messages'
 
+const pageBody = {
+    backgroundColor: 'rgb(241, 50, 50)',
+    height: '50rem'
+}
+
+const boldText = {
+    fontWeight: 'bold'
+}
+
+const signOutButton = {
+    backgroundColor: 'black',
+    fontWeight: 'bold',
+    border: 'none'
+}
+
+const signOutText = {
+    textAlign: 'center',
+    fontFamily: 'Bungee Inline',
+    color: 'white',
+    fontWeight: 'bold'
+}
+
 const SignOut = (props) => {
 	const { msgAlert, clearUser, user } = props
-    console.log(props)
 
     const navigate = useNavigate()
 
@@ -30,15 +51,20 @@ const SignOut = (props) => {
 
 	return (
 		<>
-            <div className='row'>
-                <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-                    <h2>Are you sure you want to sign out?</h2>
+            <div style={pageBody} className='row'>
+                <div className='col-sm-10 col-md-8 mx-auto mt-5' style={signOutText}>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <h2 style={boldText}>Are you sure you want to sign out?</h2>
+                    <br></br>
                     <small>We hate to see you go...</small><br/>
+                    <br></br>
                     <ButtonGroup>
-                        <Button variant='danger' onClick={onSignOut}>
+                        <Button style={signOutButton} onClick={onSignOut}>
                             Sign Out
                         </Button>
-                        <Button variant='warning' onClick={onCancel}>
+                        <Button style={boldText} variant='warning' onClick={onCancel}>
                             Cancel
                         </Button>
                     </ButtonGroup>

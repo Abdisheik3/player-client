@@ -25,7 +25,6 @@ const NewReviewModal = (props) => {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('new review',review)
         createReview(user, game.id, review)
             .then(() => handleClose())
             .then(() => {

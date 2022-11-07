@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react' 
+import React, { useEffect, useState } from 'react'
 import { Container, Card, Button, ButtonGroup } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { localGameShow } from '../../api/game'
@@ -12,7 +12,7 @@ const backgroundCSS = {
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'center',
-    width:'350px',
+    width: '350px',
     marginBottom: '20px'
 }
 
@@ -37,7 +37,7 @@ const boldText = {
 
 const cardCSS = {
     marginTop: '20px',
-   
+
     width: '20rem',
     height: '35rem',
     display: 'flex',
@@ -63,79 +63,67 @@ const imageDisplay = {
 }
 
 const GameShow = ({ user, msgAlert, gameId, mine, setUser }) => {
-    
+
     const [game, setGame] = useState(null)
 
     const navigate = useNavigate()
-    // let { apiId } = useParams()
-
-    // if (gameId) {
-    //     apiId  = gameId
-    // } 
-    // console.log(apiId)
     const removeFromMyLibrary = () => {
         removeFromCollection(user, gameId)
-        .then((res) => {
-            console.log('here is a res', res)
-            setUser(res.data.user)
-        })
-        .then(() => {
-            // console.log('user after delete', user)
-            // console.log('res user', res.user)
-            msgAlert({
-                heading: 'Success',
-                message: 'Removed game from your library',
-                variant: 'success'
+            .then((res) => {
+
+                setUser(res.data.user)
             })
-            
-        })
-        
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Failed to remove game from your Library' + error,
-                variant: 'danger'
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: 'Removed game from your library',
+                    variant: 'success'
+                })
+
             })
-        })
+
+            .catch((error) => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Failed to remove game from your Library' + error,
+                    variant: 'danger'
+                })
+            })
     }
 
     const myFavorite = () => {
         setAsFavorite(user, gameId)
-        .then((res) => {
-            setUser(res.data.user)
-        })
-        .then(() => {
-            // console.log('user after delete', user)
-            // console.log('res user', res.user)
-            msgAlert({
-                heading: 'Success',
-                message: 'Set Game as Favorite',
-                variant: 'success'
+            .then((res) => {
+                setUser(res.data.user)
             })
-            
-        })
-        
-        .catch((error) => {
-            msgAlert({
-                heading: 'Failure',
-                message: 'Failed to set Game as Favorite' + error,
-                variant: 'danger'
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: 'Set Game as Favorite',
+                    variant: 'success'
+                })
+
             })
-        })
+
+            .catch((error) => {
+                msgAlert({
+                    heading: 'Failure',
+                    message: 'Failed to set Game as Favorite' + error,
+                    variant: 'danger'
+                })
+            })
     }
-    
+
 
     useEffect(() => {
         localGameShow(user, gameId)
             .then((res) => {
-                console.log(res)
                 setGame({
                     name: res.data.game.title,
                     description: res.data.game.description,
                     image: res.data.game.imgUrl,
                     thumbnail: res.data.game.thumbnailUrl
                 })
-                // setGame(res.data.results.name)
             })
             .catch((error) => {
                 msgAlert({
@@ -150,24 +138,27 @@ const GameShow = ({ user, msgAlert, gameId, mine, setUser }) => {
     if (!game) {
         return (
             <>
-            <div style={backgroundCSS}>
-            <Container style={findingResult}>
-                <p>Finding game</p>
-                <p>     
-                <Spinner animation='border' style={spinnerCSS}> 
-                </Spinner>
-                </p>
-            </Container>
-            </div>
+                <div style={backgroundCSS}>
+                    <Container style={findingResult}>
+                        <p>Finding game</p>
+                        <p>
+                            <Spinner animation='border' style={spinnerCSS}>
+                            </Spinner>
+                        </p>
+                    </Container>
+                </div>
             </>
-    )}
+        )
+    }
 
     return (
         <>
         <div style={backgroundCSS}>
 			<Container className="fluid">
                 <Card style={cardCSS}>
-                <Card.Header style={cardHeader}><h3>{ game.name }</h3></Card.Header>
+                <Card.Header style={cardHeader}>
+                    <h3 style={boldText}>{ game.name }</h3>
+                </Card.Header>
                 <Card.Img variant="top" src={game.image} style={imageDisplay} />
                 <Card.Body>
                     <Card.Text>
@@ -199,6 +190,37 @@ const GameShow = ({ user, msgAlert, gameId, mine, setUser }) => {
                 </Card>
             </Container>
         </div>
+            {/* <div style={backgroundCSS}>
+                <Container className="fluid">
+                    <Card style={cardCSS}>
+                        <Card.Header style={cardHeader}><h3>{game.name}</h3></Card.Header>
+                        <Card.Img variant="top" src={game.image} style={imageDisplay} />
+                        <Card.Body>
+                            <Card.Text>
+
+                                <div>
+                                    <small><span style={boldText}>Description:</span> {game.description}</small>
+                                </div>
+                            </Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
+                            <Button onClick={() => navigate(`/games/${gameId}`)}>See Game Page</Button>
+                            {mine ?
+                                <>
+                                    <Button onClick={() => removeFromMyLibrary()} className="btn-success m-1">Remove from Library</Button>
+                                    {user.thumbnail != game.thumbnail ?
+                                        <Button onClick={() => myFavorite()} className="btn-success m-1">Set as Profile Pic</Button>
+                                        :
+                                        null
+                                    }
+                                </>
+                                :
+                                null
+                            }
+                        </Card.Footer>
+                    </Card>
+                </Container>
+            </div> */}
         </>
     )
 }

@@ -81,3 +81,13 @@ export const addPlatform = (user, platform) => {
 		},
 	})
 }
+
+export const viewProfile = (user, otherUsername ) => {
+	return axios({
+		method: 'GET',
+		url: apiUrl + '/profile/' + otherUsername,
+        headers: {
+			Authorization: `Token token=${user.token}`,
+		},
+	})
+}

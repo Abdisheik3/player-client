@@ -12,14 +12,10 @@ const Search = () => {
         e.preventDefault()
         // window.location.href = "http://localhost:3000/games/search/" + `${name}`
         navigate(`/games/search/${name}`)
-
-        console.log(name)
-      
-    
     }
     return (
     <div>
-    <form onSubmit={searchGame}>
+    <form onSubmit={searchGame} action="/games/search/" method="get">
         <label htmlFor="header-search">
             <span className="visually-hidden">Search all games</span>
         </label>

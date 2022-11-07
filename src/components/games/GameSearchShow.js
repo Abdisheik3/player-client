@@ -9,12 +9,16 @@ const backgroundCSS = {
     backgroundColor: 'rgb(212, 212, 212)',
     // backgroundColor: 'rgb(120, 219, 111)',
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
+}
+
+const cardHeader = {
+    fontFamily: 'Bungee Inline',
 }
 
 const cardBody = {
     width: '100%',
-    height: '100%'
+    height: '100%',
 }
 
 const spinnerCSS = {
@@ -28,8 +32,8 @@ const boldText = {
 const cardCSS = {
     marginTop: '20px',
     marginBottom: '20px',
-    width: '5rem',
-    height: '15rem',
+    width: '15rem',
+    height: '19rem',
     display: 'flex',
     justifyContent: 'center',
     textAlign: 'center',
@@ -51,7 +55,6 @@ const imageDisplay = {
 }
 
 const GameSearchShow = (props) => {
-// console.log('from gameseacrhshow',game)
 const { name, image, id } = props
 const navigate = useNavigate()
 
@@ -74,8 +77,10 @@ const navigate = useNavigate()
         <>
         <div style={backgroundCSS}>
 			<Container className="fluid" onClick={() => navigate(`/games/${id}`)}>
-                <Card >
-                <Card.Header><h3>{ name }</h3></Card.Header>
+                <Card style={cardCSS}>
+                <Card.Header style={cardHeader}>
+                    <h3 style={boldText}>{ name }</h3>
+                </Card.Header>
                 <Card.Body>
                     <Card.Text>
                         <div style={cardBody}>

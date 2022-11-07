@@ -4,20 +4,27 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { Link } from 'react-router-dom'
 import Search from '../Search'
+import { RiGameFill } from 'react-icons/ri'
 
 const linkStyle = {
     color: 'white',
     textDecoration: 'none',
 	fontFamily: 'Bungee Inline',
-	fontSize: '13px'
-	// fontWeight: 'bold'
+	fontSize: '13px',
+	fontWeight: 'bold'
+}
+
+const searchStyle = {
+	fontFamily: 'Bungee Inline',
+	fontSize: '15px',
 }
 
 const logoStyle = {
     color: 'white',
     textDecoration: 'none',
 	fontFamily: 'Bungee Inline',
-	fontSize: '20px'
+	fontSize: '20px',
+	fontWeight: 'bold'
 }
 
 const headerStyle = {
@@ -35,82 +42,74 @@ const unauthenticatedCSS = {
 }
 
 const authenticatedOptions = (
-	
+	<>
+	<div style={searchStyle} className='m-2'>
+	<Search/>
+	</div>
 	<div>
-        <Nav.Link>
+		<Nav.Link>
 			<Link to='my-profile' style={linkStyle} className='m-2'>
 				My Profile
 			</Link>
 		</Nav.Link>
+	</div>
 		<Nav.Link>
 			<Link to='change-password' style={linkStyle} className='m-2'>
-				Change Password
+				Update Password
 			</Link>
 		</Nav.Link>
+	<div>
 		<Nav.Link>
 			<Link to='sign-out' style={linkStyle} className='m-2'>
 				Sign Out
 			</Link>
 		</Nav.Link>
-
-		<Nav.Link>
-			<Link to='my-profile' style={linkStyle} className='m-2'>
-				My profile
-			</Link>
-		</Nav.Link>
-		<Nav.Link>
-			<Link to='games/22975' style={linkStyle} className='m-2'>
-				View Game
-			</Link>
-		</Nav.Link>
-	</div>	
+	</div>
+	</>
 
 )
 
 const unauthenticatedOptions = (
 	<>
+	<div>
         <Nav.Link style={unauthenticatedCSS}>
 		    <Link to='sign-up' style={linkStyle} className='m-2'>Create Account</Link>
         </Nav.Link>
+	</div>
+	<div>
         <Nav.Link>
 		    <Link to='sign-in' style={linkStyle} className='m-2'>Login</Link>
         </Nav.Link>
+	</div>
 	</>
 )
 
 const alwaysOptions = (
 	<>
 
-		<Nav.Item>
+		{/* <Nav.Item>
 			<Search/>
-		</Nav.Item>
+		</Nav.Item> */}
 	</>
 )
 
-const Header = ({ user }) =>
-
-(
-    
+const Header = ({ user }) => (
 	
 	<Navbar style={ headerStyle } variant='dark' expand='md'>
 		<Navbar.Brand style={ appLogo }>
             <Link to='/' style={logoStyle}>
-                GameShare
+                GameShar
             </Link>
+			<Link to='/' style={logoStyle}>
+				<RiGameFill/>
+			</Link>
         </Navbar.Brand>
 		<Navbar.Toggle aria-controls='basic-navbar-nav' />
 		<Navbar.Collapse id='basic-navbar-nav'>
-			<Nav className='ml-auto'>
-				{user && (
-					<span className='navbar-text mr-2'>Welcome, {user.username}</span>
-				)}
-				{/* {alwaysOptions}
-				{user ? authenticatedOptions : unauthenticatedOptions} */}
-			</Nav>
 			<Container fluid='md'>
 			<Nav className='justify-content-end'>
 				{/* {alwaysOptions} */}
-				<Search/>
+				{/* <Search user={user}/> */}
 				{user ? authenticatedOptions : unauthenticatedOptions}
 			</Nav>
 			</Container>

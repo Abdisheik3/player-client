@@ -9,15 +9,38 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const pageBody = {
-    backgroundColor: 'rgb(120, 219, 111)'
+    backgroundColor: 'rgb(241, 50, 50)',
+    height: '50rem'
+}
+
+const bungeeFont = {
+    fontFamily: 'Bungee Inline',
+    fontWeight: 'bold',
+    marginTop: '5px',
+    color: 'white'
+}
+
+const welcomeText = {
+    textAlign: 'center',
+    fontFamily: 'Bungee Inline',
+    color: 'white'
+}
+
+const boldText = {
+    fontWeight: 'bold'
 }
 
 const submitButtonStyle = {
-    // backgroundColor: 'black',
-    backgroundColor: 'rgb(35, 114, 28)',
-    borderColor: 'black',
-    marginTop: '10px',
-    borderRadius: '15%'
+    border: 'none',
+    marginTop: '1rem',
+    borderRadius: '15%',
+    fontWeight: 'bold',
+    height: '3rem',
+    width: '6rem'
+}
+
+const buttonCenter = {
+    textAlign: 'center'
 }
 
 
@@ -66,12 +89,14 @@ const SignUp = (props) => {
 
     return (
         <div className='row' style={ pageBody }>
-            <div className='col-sm-10 col-md-8 mx-auto mt-5'>
-                <h3>Welcome to GameShare!</h3>
-                <h6>Create your account below</h6>
+            <div className='col-sm-10 col-md-8 mx-auto mt-5' style={bungeeFont}>
+                <div style={welcomeText}>
+                <h3 style={boldText}>Welcome to GameShare!</h3>
+                <h6 style={boldText}>Create your account below</h6>
+                </div>
                 <Form onSubmit={onSignUp}>
                 <Form.Group >
-                        <Form.Label>Username</Form.Label>
+                        <Form.Label style={bungeeFont}>Username</Form.Label>
                         <Form.Control
                             required
                             type='strings'
@@ -84,7 +109,7 @@ const SignUp = (props) => {
                         />
                     </Form.Group>
                     <Form.Group controlId='email'>
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label style={bungeeFont}>Email address</Form.Label>
                         <Form.Control
                             required
                             type='email'
@@ -95,7 +120,7 @@ const SignUp = (props) => {
                         />
                     </Form.Group>
                     <Form.Group controlId='password'>
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label style={bungeeFont}>Password</Form.Label>
                         <Form.Control
                             required
                             name='password'
@@ -106,7 +131,7 @@ const SignUp = (props) => {
                         />
                     </Form.Group>
                     <Form.Group controlId='passwordConfirmation'>
-                        <Form.Label>Password Confirmation</Form.Label>
+                        <Form.Label style={bungeeFont}>Password Confirmation</Form.Label>
                         <Form.Control
                             required
                             name='passwordConfirmation'
@@ -116,9 +141,11 @@ const SignUp = (props) => {
                             onChange={e => setPasswordConfirmation(e.target.value)}
                         />
                     </Form.Group>
+                    <div style={buttonCenter}>
                     <Button style={ submitButtonStyle } variant='primary' type='submit'>
                         Submit
                     </Button>
+                    </div>
                 </Form>
             </div>
         </div>

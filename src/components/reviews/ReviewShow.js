@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import { deleteReview } from '../../api/review'
 import EditReviewModal from './EditReviewModal'
 
@@ -8,6 +9,7 @@ const ShowReview = (props) => {
     console.log('this is the props', props)
 
     const [editModalShow, setEditModalShow] = useState(false)
+    const navigate = useNavigate()
 
     const destroyReview = () => {
         deleteReview(user, review._id)
@@ -31,7 +33,7 @@ const ShowReview = (props) => {
     return (
         <>
             <Card className="m-2" >
-                <Card.Header>Reviewed By: {review.username}</Card.Header>
+                <Card.Header onClick={() => navigate(`/profile/${review.username}`)}>Reviewed By: {review.username}</Card.Header>
                 <Card.Body>
                     <h6>Score: { review.score }/5</h6>
                     { review.comment }

@@ -58,11 +58,11 @@ const findingResult = {
 }
 
 const imageDisplay = {
-    height: '50%',
+    // height: '50%',
     width: '50%'
 }
 
-const GameShow = ({ user, msgAlert, gameId, setUser }) => {
+const GameShow = ({ user, msgAlert, gameId, mine, setUser }) => {
     
     const [game, setGame] = useState(null)
 
@@ -181,9 +181,16 @@ const GameShow = ({ user, msgAlert, gameId, setUser }) => {
                 </Card.Body>
                 <Card.Footer>
                     {/* <ButtonGroup> */}
+                        <Button onClick={() => navigate(`/games/${gameId}`)}>See Game Page</Button>
+                        {mine?
+                        <>
                         <Button onClick={() => removeFromMyLibrary()} className ="btn-success m-1">Remove from Library</Button>
                         {user.thumbnail != game.thumbnail?
                         <Button onClick={() => myFavorite()} className ="btn-success m-1">Set as Profile Pic</Button>
+                        :
+                        null
+                        }
+                        </>
                         :
                         null
                         }
